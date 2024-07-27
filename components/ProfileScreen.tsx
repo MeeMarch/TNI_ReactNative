@@ -4,16 +4,18 @@ import styles from '../styles/styles';
 
 const ProfileScreen = ():React.JSX.Element => {
 
-//const profileImage = require("../assets/Profile.jpg");
+const profileImage = require("../assets/Profile.jpg");
+const newProfile = require("../assets/Profile2.jpg")
+
 const [name, setName] = useState("Apsorn Poiem");
-const [image, setImage] = useState(require("../assets/Profile.jpg"));
+const [image, setImage] = useState(profileImage);
 
 const handleChangeName = ()=>{
-    setName("New Name")
+    setName(name == "Apsorn Poiem" ? "Meena":"Apsorn Poiem")
 }
 
 const handleChangeImage = ()=>{
-    setImage(require("../assets/Profile2.jpg"))
+    setImage(image == profileImage ? newProfile:profileImage)
 }
 
   return (

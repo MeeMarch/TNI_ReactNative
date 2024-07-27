@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
         width:100,
         height:100,
         marginRight:20,
+        borderColor:"black",
+        borderWidth:2
     },
     profileContainer:{
         flexDirection:"row",
