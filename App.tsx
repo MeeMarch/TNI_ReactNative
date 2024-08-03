@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { StyleSheet, TextInput, View} from "react-native";
+import { StyleSheet, TextInput, View, Alert} from "react-native";
 import AppFooter from "./components/AppFooter";
 import AppHeader from "./components/AppHeader";
 import Content from "./components/Content";
@@ -20,10 +20,15 @@ export default function App():React.JSX.Element {
     console.log(`Fullname has changed to: ${fullname}`);
   },[fullname]); //This will run whenever 'fullname' changes
 
+  const handleButtonClick =() => {
+    Alert.alert("Hello", `Input your fullname: ${fullname}`);
+  };
+
   return (
     <View style={styles.container}>
       <AppHeader fullname={fullname} message={message} />
-      <Content message={message} fullname={fullname} />
+      {/* <Content message={message} fullname={fullname} /> */}
+      <Content message={message} onButtonClick = {handleButtonClick} />
       <AppFooter footerMessage={footerMessage} />
 
       <TextInput
