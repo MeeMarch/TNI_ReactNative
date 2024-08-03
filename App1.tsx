@@ -7,15 +7,16 @@ import Content from "./components/Content";
 
 export default function App():React.JSX.Element {
 
+  const title="Apsorn Poiem";
+  const subtitle="Message from App.tsx";
 
   return (
     <View style={styles.container}>
-      <AppHeader title="Apsorn Poiem"
-      subtitle="Message from App.tsx"/>
+      <AppHeader title={title}
+      subtitle={subtitle}/>
 
-      <Content msg="Message from App.tsx" name="Apsorn Poiem"/>
+      <Content msg={subtitle} name={title}/>
 
-      
       <AppFooter ftitle="Thai-Nichi Institute of Technology"/>
     </View>
   );
