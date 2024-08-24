@@ -4,6 +4,9 @@ import ProfileScreen from './components/ProfileScreen'
 import FlashListExample from './components/FlashListExample'
 import FlatListcallBackend from './components/FlatListcallBackend'
 import NewsApp from './components/NewsApp'
+import AxiospostData from './components/AxiospostData'
+import WeatherLondon from './components/WeatherLondon'
+import WeatherBangkok from './components/WeatherBangkok'
 
 const App = ():React.JSX.Element => {
   return (
@@ -11,7 +14,10 @@ const App = ():React.JSX.Element => {
       {/* <ProfileScreen/> */}
       {/* <FlashListExample/> */}
       {/* <FlatListcallBackend/> */}
-      <NewsApp/>
+      {/* <NewsApp/> */}
+      {/* <AxiospostData/> */}
+      {/* <WeatherLondon/> */}
+      <WeatherBangkok/>
     </View>
   )
 }
