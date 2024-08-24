@@ -12,56 +12,42 @@ interface WeatherState {
   data: any;
   loading: boolean;
   error: string | null;
-  currentDate: Date | null; //Allow null initially
 }
-
-const formatDate = (date: Date | null): string => {
-  if(!date) return ''; //Return an empty string if date is null
-  const options: Intl.DateTimeFormatOptions = {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  };
-  return date.toLocaleDateString("th-TH",options);
-};
 
 const WeatherBangkok = (): React.JSX.Element => {
   const [state, setState] = useState<WeatherState>({
     data: null,
     loading: true,
     error: null,
-    currentDate: new Date(),
-  });
+  }); // set default state
 
-  const fetchWeatherData = async () => {
-    const API_KEY = "'d78aaab2d84844433d115114fb3bb62e";
+  const fetWeatherData = async () => {
+    const API_KEY = "d78aaab2d84844433d115114fb3bb62e";
     const URL = `https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=${API_KEY}&units=metric&lang=th`;
-
     try {
-      const response = await axios.get(URL);
+      const res = await axios.get(URL);
       setState({
-        data: response.data,
+        data: res.data,
         loading: false,
         error: null,
-        currentDate: new Date(),
       });
     } catch (error) {
       setState({
         data: null,
         loading: false,
         error: "Failed to fetch weather data",
-        currentDate: null,
       });
     }
   };
+
   useEffect(() => {
-    fetchWeatherData();
+    fetWeatherData();
   }, []);
 
   if (state.loading) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size={"large"} color={"#0000ff"} />
       </View>
     );
   }
@@ -76,16 +62,15 @@ const WeatherBangkok = (): React.JSX.Element => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.dateText}>{formatDate(state.currentDate)}</Text>
-      {/* <Text style={styles.dateText}>
-        {new Date().toLocaleDateString("th-TH", {
-          year: "numeric",
-          month: "long",
+      <Text style={{ paddingTop: 25 }}>
+        {new Date().toLocaleString("th-TH", {
           day: "numeric",
+          month: "long",
+          year: "numeric",
         })}
-      </Text> */}
+      </Text>
       <Text style={styles.cityName}>{state.data.name}</Text>
-      <Text style={styles.temp}>{state.data.main.temp} C</Text>
+      <Text style={styles.temp}>{state.data.main.temp}°C</Text>
       <Text style={styles.weatherMain}>{state.data.weather[0].main}</Text>
       <Text style={styles.weatherDescription}>
         {state.data.weather[0].description}
@@ -93,18 +78,19 @@ const WeatherBangkok = (): React.JSX.Element => {
 
       <FlatList
         data={[
-          { key: "รู้สึกเหมือน:", value: `${state.data.main.feels_like}: C` },
-          { key: "อุณหภูมิต่ำสุด:", value: `${state.data.main.temp_min} C` },
-          { key: "อุณหภูมิสูงสุด:", value: `${state.data.main.temp_max} C` },
-          { key: "ความชื้น:", value: `${state.data.main.humidity} %` },
-          { key: "ความกดอากาศ:", value: `${state.data.main.pressure} hPa` },
-        ]}
+          { key: "รู้สึกเหมือน", value: `${state.data.main.feels_like}°C` }, // defind key name and value
+          { key: "อุณหภูมิต่ำสุด", value: `${state.data.main.temp_min}°C` },
+          { key: "อุณหภูมิสูงสุด", value: `${state.data.main.temp_max}°C` },
+          { key: "ความชื้น", value: `${state.data.main.humidity}%` },
+          { key: "ความกดอากาศ", value: `${state.data.main.pressure} hPa` },
+        ]} // defind array object
         renderItem={({ item }) => (
           <View style={styles.detailContainer}>
-            <Text style={styles.detailKey}>{item.key}</Text>
+            <Text style={styles.detailKey}>{item.key}: </Text>
             <Text style={styles.detailValue}>{item.value}</Text>
           </View>
         )}
+        contentContainerStyle={styles.details}
       />
     </View>
   );
@@ -117,27 +103,19 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
-    backgroundColor: "#87DFD6",
+    backgroundColor: "#9DBDFF",
   },
   loadingContainer: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
   },
   errorContainer: {
     justifyContent: "center",
     alignItems: "center",
-    flex: 1,
   },
   errorText: {
     fontSize: 18,
     color: "red",
-  },
-  dateText: {
-    fontSize: 18,
-    color: "#000",
-    marginBottom: 16,
-    marginTop: 20,
   },
   cityName: {
     fontSize: 36,
@@ -149,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 64,
     fontWeight: "bold",
     marginBottom: 8,
-    color: "#CD5C08",
+    color: "#ff6347",
   },
   weatherMain: {
     fontSize: 28,
