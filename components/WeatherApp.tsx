@@ -26,13 +26,13 @@ const WeatherApp = (): React.JSX.Element => {
       <Text style={styles.title}>Weather App</Text>
       <Pressable
         style={styles.button}
-        onPress={() => setModalVisible(true)}
+        onPress={() => {setModalVisible(true),toggleModal("London")}}
       >
         <Text style={styles.buttonText}>LONDON</Text>
       </Pressable>
       <Pressable
         style={styles.button}
-        onPress={() => setModalVisible(true)}
+        onPress={() => {setModalVisible(true),toggleModal("Bangkok")}}
       >
         <Text style={styles.buttonText}>BANGKOK</Text>
       </Pressable>
@@ -41,19 +41,17 @@ const WeatherApp = (): React.JSX.Element => {
         animationType="slide"
         transparent={true}
         visible={isModalVisible}
-        // onRequestClose={() => setModalVisible(!isModalVisible)}
       >
         <View style={styles.modalBackground}>
           <View style={styles.modalContainer}>
             {renderWeatherComponent()}
             <TouchableOpacity
             style={styles.closeButton}
-            onPress={() => setModalVisible(!isModalVisible)}
+            onPress={() => setModalVisible(false)}
           >
             <Text style={styles.closeButtonText}>Close</Text>
           </TouchableOpacity>
           </View>
-          
         </View>
       </Modal>
     </View>
