@@ -7,6 +7,7 @@ import HomeScreen from "./screens/HomeScreen";
 import AboutScreen from "./screens/AboutScreen";
 import MenuScreen from "./screens/MenuScreen";
 import ProductScreen from "./screens/ProductScreen";
+import DetailScreen from "./screens/DetailScreen";
 
 import { NavigationContainer } from "@react-navigation/native";
 import CreatePostScreen from "./screens/CreatePostScreen";
@@ -57,14 +58,12 @@ function ProductStackScreen() {
     <ProductStack.Navigator
       initialRouteName="Home"
       screenOptions={{
-         //Global
+        //Global
         headerTitleStyle: { fontWeight: "bold" },
       }}
     >
-      <ProductStack.Screen
-        name="Product"
-        component={ProductScreen}
-      />
+      <ProductStack.Screen name="Product" component={ProductScreen} />
+      <ProductStack.Screen name="Detail" component={DetailScreen} />
     </ProductStack.Navigator>
   );
 }
@@ -80,7 +79,6 @@ const App = (): React.JSX.Element => {
           >
             <Drawer.Screen name="HomeStack" component={HomeStackScreen} />
             <Drawer.Screen name="ProductStack" component={ProductStackScreen} />
-
           </Drawer.Navigator>
         </NavigationContainer>
       </HeaderButtonsProvider>
